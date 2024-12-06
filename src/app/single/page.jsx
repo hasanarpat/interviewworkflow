@@ -1,19 +1,29 @@
+"use client";
 import React from "react";
-import {
-  AppBar,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Stack } from "@mui/material";
 import styles from "@/styles/newPage/new.module.scss";
 import NavButton from "@/components/ui/navButton/NavButton";
 import StateCard from "@/components/ui/stateCard/StateCard";
 import BackButton from "@/components/ui/backButton/BackButton";
+import Navigation from "@/components/formSteps/Navigation";
+import { useSearchParams } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { assignJobDetails, assignQuestions } from "@/redux/slices/formSlice";
+import { getData } from "@/firebase/data";
 
 const New = () => {
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("id");
+  const dispatch = useDispatch();
+  const fetchInterview = async () => {
+    const res = await getData(slug);
+    dispatch(assignJobDetails(res.data.jobDetails));
+    dispatch(assignQuestions(res.data.questions));
+  };
+  if (slug) {
+    fetchInterview();
+  }
+
   return (
     <div className={styles.new}>
       {/* NAVBAR START */}
@@ -38,39 +48,15 @@ const New = () => {
             spacing={4}
           >
             <BackButton />
-            <StateCard header="Interview Title" />
-            <Card sx={{ minWidth: 225, height: 120 }}>
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  sx={{ color: "text.secondary", fontSize: 14 }}
-                >
-                  Interview Questions
-                </Typography>
-                <Typography variant="h6" component="div">
-                  What&apos;s SSR/CSR?
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card sx={{ minWidth: 225, height: 120 }}>
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  sx={{ color: "text.secondary", fontSize: 14 }}
-                >
-                  Summary & Review
-                </Typography>
-                <Typography variant="h6" component="div">
-                  Submit Interview
-                </Typography>
-              </CardContent>
-            </Card>
+            <StateCard id={1} />
+            <StateCard id={2} />
+            <StateCard id={3} />
           </Stack>
         </AppBar>
       </Box>
       {/* NAVBAR END */}
       {/* MAIN SECTION START */}
-
+      <Navigation />
       {/* MAIN SECTION END */}
       {/* BOTTOM ACTIONS START */}
       <Box sx={{ flexGrow: 1 }}>
@@ -94,7 +80,7 @@ const New = () => {
               justifyContent: "flex-end",
             }}
           >
-            <Button
+            <NavButton
               variant="text"
               color="inherit"
               sx={{
@@ -106,6 +92,7 @@ const New = () => {
                 width: "8rem",
                 marginRight: "auto",
               }}
+              action="prev"
             >
               <span>
                 <svg
@@ -122,18 +109,19 @@ const New = () => {
                 </svg>
               </span>
               Previous
-            </Button>
+            </NavButton>
             <Stack direction="row" spacing={{ xs: 1, lg: 2 }}>
-              <Button
+              <NavButton
                 color="inherit"
                 variant="text"
                 sx={{
                   padding: "1rem 2rem",
                   width: "8rem",
                 }}
+                action="next"
               >
                 Next
-              </Button>
+              </NavButton>
               <NavButton
                 color="inherit"
                 variant="contained"
@@ -149,9 +137,10 @@ const New = () => {
                     scale: 1.1,
                   },
                 }}
-                text="Publish"
-                action={"s"}
-              />
+                action={"publish"}
+              >
+                Publish
+              </NavButton>
             </Stack>
           </Stack>
         </AppBar>

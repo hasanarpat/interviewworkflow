@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "question": "What are the main features of HTML5?",
+    "score": 2
+  },
+  {
+    "id": 2,
+    "question": "Explain the difference between `==` and `===` in JavaScript.",
+    "score": 0
+  },
+  {
+    "id": 3,
+    "question": "What are some common use cases for the `useEffect` hook in React?",
+    "score": 1
+  },
+  {
+    "id": 4,
+    "question": "Describe the box model in CSS and how `margin` and `padding` differ.",
+    "score": 3
+  },
+  {
+    "id": 5,
+    "question": "How would you optimize a React app's performance?",
+    "score": 2
+  }
+]

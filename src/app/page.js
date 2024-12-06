@@ -84,7 +84,7 @@ export default function Home() {
       className={styles.page}
     >
       <Stack spacing={2} direction="row">
-        <Link href="/new">
+        <Link href="/single">
           <Button variant="contained">Create New Interview</Button>
         </Link>
         <Link href="/interviews">
