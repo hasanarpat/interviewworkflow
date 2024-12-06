@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import styles from "./page.module.css";
 
 import Table from "@mui/material/Table";
@@ -83,39 +83,23 @@ export default function Home() {
       direction={{ xs: "column", lg: "row" }}
       className={styles.page}
     >
-      <Stack spacing={2} direction="row">
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{ width: "50%", alignItems: "center", justifyContent: "center" }}
+      >
         <Link href="/single">
           <Button variant="contained">Create New Interview</Button>
         </Link>
-        <Link href="/interviews">
-          <Button variant="outlined">See All Interviews</Button>
-        </Link>
       </Stack>
-      <Stack>
-        <TableContainer
-          className="table"
-          component={Paper}
-          sx={{ height: "420px", maxHeight: "100%", overflow: "scroll" }}
-        >
-          <Table sx={{ minWidth: 420 }} aria-label="simple table">
-            <TableBody>
-              {rows.map((row, i) => (
-                <TableRow
-                  key={i}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      <Stack
+        sx={{ width: "50%", alignItems: "center", justifyContent: "center" }}
+      >
+        <Typography variant="h3" component="p">
+          After you have created an interview and submit it interview id will be
+          logged on console. you can go to url: /single?id=interviewId to view
+          back saved interview and edit it again.
+        </Typography>
       </Stack>
     </Stack>
   );
