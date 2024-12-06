@@ -19,7 +19,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Item } from "../ui/dragItem/Item";
+import Item from "../ui/dragItem/Item";
 import { rearrangeArray, reorderQuestions } from "@/redux/slices/formSlice";
 import { useSearchParams } from "next/navigation";
 
