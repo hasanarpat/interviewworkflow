@@ -6,5 +6,5 @@ const Item = forwardRef(({ id, ...props }, ref) => {
     </div>
   );
 });
-
+Item.displayName = "Item";
 export default Item;
